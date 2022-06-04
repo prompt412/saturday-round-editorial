@@ -37,7 +37,7 @@ D번은 읽고 당장 $O(N^3)$ 아래의 풀이가 생각이 안 났는데, 그�
 
 ### Div2A. 공사장 표지판
 
-$ i == 0 \or i == n - 1 \or j ==0 \or j == n -1 \or i == j \or i == n - i - j $를 만족하는 모든 위치에 *을 찍어주면 된다.
+$ i == 0 \mid i == n - 1 \mid j ==0 \mid j == n -1 \mid i == j \mid i == n - i - j $를 만족하는 모든 위치에 *을 찍어주면 된다.
 
 ### Div2B. Candy Sharing Game
 
