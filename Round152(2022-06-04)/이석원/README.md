@@ -9,12 +9,12 @@
 
 - 각 (i, j)에 대해 cell 오른쪽에 있는 O의 개수와 아래에 있는 I의 개수를 빠르게 구하면 되는 문제였다.
 - Prefix sum을 써서 풀긴 했는데 실버에서 나올 자료구조가 아니라는 생각을 했다.
-- 라운드가 끝나고 다른 풀이(https://www.acmicpc.net/source/31359137)를 찾아보니 맨 아래 오른쪽 cell부터 역순으로 올라오면서 count를 하면 prefix sum 없이 풀 수 있었다.
+- 라운드가 끝나고 다른 풀이(https://www.acmicpc.net/source/31359137) 를 찾아보니 맨 아래 오른쪽 cell부터 역순으로 올라오면서 count를 하면 prefix sum 없이 풀 수 있었다.
 
 ### 2. Pascal's Travels
 
 - 좌상단 cell에서 우하단 cell까지 가는 경로의 수를 묻는 전형적인 DP 문제였다.
-- 처음 떠오른 풀이는 $ DP(i, j) = \sum_{k < i and board[k][j] = (i - k)} DP(k, j) + \sum_{k < j) and board[i][k] = (j - k)} DP(i, k) $ 였다.
+- 처음 떠오른 풀이는 $ DP(i, j) = \sum_{k < i ~\text{and}~ board[k][j] = (i - k)} DP(k, j) + \sum_{k < j} ~\text{and}~ board[i][k] = (j - k)} DP(i, k) $ 였다.
 - $ O(N^3) $ 으로 풀려서 그냥 빠르게 코딩하고 넘어갔다.
 - 끝나고 현욱님 설명을 들으면서 $ DP(i, j) = DP(i, j + board[i][j]) + DP(i + board[i][j], j) $ 로 모델링하면 $ O(N^2) $ 에 풀린다는 걸 알게 됐다.
 
@@ -33,7 +33,7 @@
 - Strassen algorithm을 써야 하나 잠시 고민했지만 그래도 1초로는 부족했다.
 - `bitset`을 쓰면 $ 2000^3 / 64 = 1.25억 $ 이 나와서 일단 구현해봤는데 다행히 968ms로 통과했다.
   - [R149](https://github.com/prompt412/saturday-round-editorial/blob/main/Round149(2022-05-14)/%EC%9D%B4%EC%84%9D%EC%9B%90/review.md#4-%EC%97%B0%EC%82%B0-%EC%B5%9C%EB%8C%80%EB%A1%9C)에서도 $ O(1.3억) $ 풀이로 1초 제한을 통과한 적이 있다.
-- $ row_{Q_{i, a}} \dot col_{Q_{i, b}} for 1 \leq i \leq Q $ 로 풀면 더 빨랐을 거다.
+- $ row_{Q_{i, a}} \cdot col_{Q_{i, b}} for 1 \leq i \leq Q $ 로 풀면 더 빨랐을 거다.
 
 ### 5. IQ Test
 
@@ -51,6 +51,6 @@
 - 포함배제의 원리로 문제를 모델링할 수가 있다.
   - $f(x)$를 최대공약수가 $x$의 배수가 되도록 $K$개의 수를 고르는 방법이라고 해보자.
   - 이때 $1 \leq x \leq 1000000$인 모든 $x$에 대해, $x$의 소인수분해에서 지수가 2 이상인 경우가 있으면 해당 $x$는 무시하고, 나머지 경우 중 소인수가 짝수 개면 더해주고 홀수 개면 빼주면 된다.
-  - $f(1) - (f(2) + f(3) + \cdots) + (f(2 \dot 3) + f(2 \dot 5) + \codts + f(3 \dot 5) + \cdots) - \cdots $
+  - $f(1) - (f(2) + f(3) + \cdots) + (f(2 \cdot 3) + f(2 \cdot 5) + \cdots + f(3 \cdot 5) + \cdots) - \cdots $
 - 이때 앞의 $\pm$을 결정하는 함수가 [뫼비우스 함수](https://ohgym.tistory.com/19) $\mu(x)$ 이다.
 - 덕분에 좋은 알고리즘 하나를 배울 수 있었다.
