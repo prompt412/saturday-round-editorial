@@ -14,7 +14,7 @@
 ### 2. Pascal's Travels
 
 - 좌상단 cell에서 우하단 cell까지 가는 경로의 수를 묻는 전형적인 DP 문제였다.
-- 처음 떠오른 풀이는 $ DP(i, j) = \sum_{k < i \; \text{and}\; board[k][j] = (i - k)} DP(k, j) + \sum_{k < j \; \text{and}\; board[i][k] = (j - k)} DP(i, k) $ 였다.
+- 처음 떠오른 풀이는 $ DP(i, j) = \sum_{k < i, board[k][j] = (i - k)} DP(k, j) + \sum_{k < j, board[i][k] = (j - k)} DP(i, k) $ 였다.
 - $ O(N^3) $ 으로 풀려서 그냥 빠르게 코딩하고 넘어갔다.
 - 끝나고 현욱님 설명을 들으면서 $ DP(i, j) = DP(i, j + board[i][j]) + DP(i + board[i][j], j) $ 로 모델링하면 $ O(N^2) $ 에 풀린다는 걸 알게 됐다.
 
