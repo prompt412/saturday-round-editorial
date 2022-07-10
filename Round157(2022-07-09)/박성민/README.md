@@ -42,5 +42,93 @@ MST는 다시 나와도 이제는 편하게 풀 수 있을 것 같다.
 잘하는 사람 코드 읽는 건 도움이 된다..
 MST 코드는 비슷했고 람다를 사용했길래 C++에서 람다를 어떻게 사용하는지 배웠다. 
 
+## D번 넵섹으로 풀기
 
+넵섹을 공부했다. dp로 푸는구나.. 
+
+**넵섹**
+
+- 물건의 무게와 가치가 주어지고, 담을 수 있는 배낭의 최대 용량이 주어진다
+- 배낭에 넣을 수 있는 물건들의 가치 합의 최댓값 구하기
+- dp[i][j] 처음부터 i까지 물건을 살펴보고, 배낭의 용량이 j였을 때 배낭에 들어간 물건 가치 합의 최댓값
+
+-> 결국 배낭에 물건을 넣은 경우 / 넣지 않았을 경우 중 가치가 더 큰 걸 고르는 것 같다. 
+
+코드는 현욱님 코드 염탐했다. 
+
+```
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <functional>
+#include <string>
+#include <queue>
+#include <deque>
+#include <stack>
+#include <set>
+#include <map>
+#include <cmath>
+#include <cstring>
+#include <bitset>
+#include <stdio.h>
+#include <math.h>
+#include <sstream>
+
+#define xx first
+#define yy second
+#define all(x) (x).begin(), (x).end()
+
+using namespace std;
+using i64 = long long int;
+using ii = pair<int, int>;
+using iis = pair<int, string>;
+using ii64 = pair<i64, i64>;
+using iii = tuple<int, int, int>;
+
+int table[205][25];
+vector<ii> book;
+
+// day: 남은 일 수, idx: 인덱스
+int solve(int day, int idx) {
+    // book 사이즈 만큼만 확인
+    if (idx == book.size())
+        return 0;
+    
+    auto& res = table[day][idx];
+    
+    if (res != -1)
+        return res;
+    
+    // 책을 안 읽는 경우
+    res = solve(day, idx + 1);
+    
+    // 책을 읽는 경우
+    // 소요되는 일 수가 현재 일 수보다 작다면
+    if (book[idx].xx <= day)
+        // 남은 일 수에서 소요되는 일 수를 뺸다
+        // 그리고 챕터의 수는 더한다
+        res = max(res, solve(day - book[idx].xx, idx + 1) + book[idx].yy);
+    
+    // 책을 읽는 경우 / 안 읽는 경우 중 큰 값 리턴
+    return res;
+}
+
+int main() {
+    int n, m;
+    scanf("%d %d", &n, &m);
+    
+    // dp 초기화를 합니다
+    memset(table, -1, sizeof(table));
+    
+    book.resize(m);
+    
+    for (int i = 0; i < m; i++)
+        scanf("%d %d", &book[i].xx, &book[i].yy);
+    
+    printf("%d\n", solve(n, 0));
+    
+    return 0;
+}
+```
 
